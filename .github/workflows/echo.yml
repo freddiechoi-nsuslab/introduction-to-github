@@ -1,0 +1,22 @@
+name: Echo tag test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get branch names
+        id: branch-name
+        uses: tj-actions/branch-names@v4.9
+
+      - name: 버전 정보 추출(from Branch Name)
+        run: echo "TAG=$(echo '${{ steps.branch-name.outputs.current_branch }}')" >> $GITHUB_ENV
+
+      - name: echo current branch name
+        run: echo "current branch name - ${{ env.TAG }}"
