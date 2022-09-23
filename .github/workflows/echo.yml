@@ -20,3 +20,4 @@ jobs:
 
       - name: echo current branch name
         run: echo "current branch name - ${{ env.TAG }}"
+        
