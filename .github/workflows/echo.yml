@@ -3,7 +3,7 @@ name: Echo tag test
 on:
   push:
     branches:
-      - main
+      - test-1
 
 jobs:
   build:
@@ -19,5 +19,19 @@ jobs:
         run: echo "TAG=$(echo '${{ steps.branch-name.outputs.current_branch }}')" >> $GITHUB_ENV
 
       - name: echo current branch name
-        run: echo "current branch name - ${{ env.TAG }}"
-        
+        run: |
+          echo "current branch name - ${{ env.TAG }}"
+          echo "repository - ${{ github.repository }}, sha - ${{ github.sha }}"
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
+      - name: Dump job context
+        run: echo '${{ toJSON(job) }}'
+      - name: Dump steps context
+        run: echo '${{ toJSON(steps) }}'
+      - name: Dump runner context
+        run: echo '${{ toJSON(runner) }}'
+      - name: Dump strategy context
+        run: echo '${{ toJSON(strategy) }}'
+      - name: Dump matrix context
+        run: echo '${{ toJSON(matrix) }}'
