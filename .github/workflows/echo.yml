@@ -3,7 +3,7 @@ name: Echo tag test
 on:
   push:
     branches:
-      - main
+      - test-1
 
 jobs:
   build:
